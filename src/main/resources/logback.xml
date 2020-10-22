@@ -7,6 +7,13 @@
         <encoder>
             <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %-5level [%thread]  %logger{36} - %msg%n</pattern>
         </encoder>
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--            <customFields>{"appname":"${appname}"}</customFields>-->
+<!--            <includeCallerData>true</includeCallerData>-->
+<!--            <fieldNames class="net.logstash.logback.fieldnames.ShortenedFieldNames"/>-->
+<!--        </encoder>-->
+
+
     </appender>
 
     <!-- logstash 5000포트 설정에 맞춰 설정 -->
