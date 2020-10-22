@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty name="appname" source="spring.application.name" defaultValue="defaultAppName"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %-5level [%thread]  %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- logstash 5000포트 설정에 맞춰 설정 -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>127.0.0.1:5000</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"appname":"${appname}"}</customFields>
+            <includeCallerData>true</includeCallerData>
+            <fieldNames class="net.logstash.logback.fieldnames.ShortenedFieldNames"/>
+        </encoder>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <root level="debug">
+        <level value="INFO"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+</configuration>
+
+
